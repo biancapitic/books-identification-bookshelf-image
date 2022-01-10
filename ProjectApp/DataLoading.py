@@ -9,7 +9,7 @@ class DataGenerator(tf.keras.utils.Sequence):
         self.input_shape = input_shape
         self.shuffle = shuffle
         self.batch_size = batch_size
-        # load the data from the root directory
+        # load the data_vers1 from the root directory
         self.class_names = []
         self.data = self.get_data(db_dir)
         self.indices = np.arange(len(self.data))
@@ -20,6 +20,7 @@ class DataGenerator(tf.keras.utils.Sequence):
         """
         paths = glob.glob(root_dir + "/*.jpg")
         self.data = paths
+        print("Here")
         return self.data
 
     def __len__(self):
@@ -30,7 +31,7 @@ class DataGenerator(tf.keras.utils.Sequence):
 
     def __getitem__(self, index):
         """"
-        Generates a batch of data
+        Generates a batch of data_vers1
         """
         batch_indices = self.indices[index * self.batch_size: (index + 1) * self.batch_size]
 
@@ -56,7 +57,6 @@ class DataGenerator(tf.keras.utils.Sequence):
         else:
             pad_height = (image.shape[0] - image.shape[1]) // 2
 
-        # edge - se multiplica prima linie si ultima si la fel si pt coloane
         return np.pad(image, ((pad_height, pad_height), (pad_width, pad_width), (0,0)), mode='edge')
 
     def on_epoch_end(self):

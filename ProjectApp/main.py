@@ -48,9 +48,9 @@ if __name__ == "__main__":
     load_trained_model(input_shape, train_db_path, test_db_path,save_model_file_path)
 
     # this is the data generator for the books spines images
-    train_generator = DataGenerator('images/test', (400, 400), 1, shuffle=True)
+    books_train_generator = DataGenerator('images/test', (400, 400), 15, shuffle=True)
 
-    batch_x = train_generator[0]
+    batch_x = books_train_generator[0]
 
     sp = SpineSeparation(batch_x)
     spines_paths = sp.spineSeparation()
